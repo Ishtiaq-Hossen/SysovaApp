@@ -107,7 +107,7 @@ class OrderCard extends StatelessWidget {
           children: [
             // Left Column
             Expanded(
-              flex: 3,
+              flex: 1,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -158,16 +158,12 @@ class OrderCard extends StatelessWidget {
               ),
             ),
             // Vertical Divider
-            Container(
-              width: 1,
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              color: Colors.grey[800],
-            ),
+            const SizedBox(width: 15),
             // Right Column
             Expanded(
-              flex: 3,
+              flex: 1,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start, // Align all content to the left
                 children: [
                   Row(
                     children: [

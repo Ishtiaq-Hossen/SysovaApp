@@ -40,9 +40,9 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF121212), // Dark theme background
+      backgroundColor: const Color(0xFF191A22), // Dark theme background
       appBar: AppBar(
-        backgroundColor: const Color(0xFF181818),
+        backgroundColor: const Color(0xFF191A22),
         title: const Text("Place Order"),
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -58,7 +58,8 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Select Customer", style: TextStyle(color: Colors.white, fontSize: 16)),
+            Text("Select Customer", style: TextStyle(color: Colors.white, fontSize: 16)),
+
             const SizedBox(height: 8),
 
             // Search Bar
@@ -67,14 +68,33 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
               onChanged: _filterCustomers,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
+
                 hintText: "Search Customer",
                 hintStyle: const TextStyle(color: Colors.grey),
                 filled: true,
-                fillColor: const Color(0xFF282838),
+                fillColor: const Color(0xFF292B3E),
                 prefixIcon: const Icon(Icons.search, color: Colors.white),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide.none,
+                  borderSide: const BorderSide(
+                    color: Colors.white, // White border color
+                    width: 1, // Border width
+                  ),
+
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(
+                    color: Colors.white, // White border color
+                    width: 1, // Border width
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(
+                    color: Colors.white, // White border color
+                    width: 1, // Border width
+                  ),
                 ),
               ),
             ),
@@ -96,7 +116,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
 
       // Bottom Navigation Bar
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFF181818),
+        backgroundColor: const Color(0xFF292B3E),
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
         items: const [
@@ -116,7 +136,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
       padding: const EdgeInsets.all(12),
       margin: const EdgeInsets.symmetric(vertical: 6),
       decoration: BoxDecoration(
-        color: const Color(0xFF282838),
+        color: const Color(0xFF292B3E),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(

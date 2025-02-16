@@ -29,14 +29,14 @@ class MyApp extends StatelessWidget {
       ),
       // home: AttendanceScreen(),
       // home: DashboardPage(),
-      // home: OrdersScreen(),
+      home: OrdersScreen(),
       // home: OrderTrackingScreen(),
       // home: PlaceOrderScreen(),
       // home: PlaceOrderTwo(),
       // home: ReportPage(),
       // home: ScheduleScreen(),
       // home: TourPlanScreen(),
-      home: WeeklyTourPlanScreen(),
+      // home: WeeklyTourPlanScreen(),
 
     );
   }

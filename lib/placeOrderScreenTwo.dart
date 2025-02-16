@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class PlaceOrderTwo extends StatefulWidget {
   const PlaceOrderTwo({Key? key}) : super(key: key);
@@ -8,270 +9,698 @@ class PlaceOrderTwo extends StatefulWidget {
 }
 
 class _PlaceOrderTwoState extends State<PlaceOrderTwo> {
-  DateTime selectedDate = DateTime.now();
-  String selectedProduct = "Adecko 24 EC";
-  String selectedPackSize = "40x25ml";
-
-  List<Map<String, dynamic>> orderList = [
-    {"product": "Adecko 24 EC", "packSize": "40x25ml", "tp": 9900, "carton": 3},
-    {"product": "Adecko 24 EC", "packSize": "40x25ml", "tp": 3300, "carton": 1},
-  ];
-
-  void _incrementCarton(int index) {
-    setState(() {
-      orderList[index]["carton"] += 1;
-    });
-  }
-
-  void _decrementCarton(int index) {
-    setState(() {
-      if (orderList[index]["carton"] > 0) {
-        orderList[index]["carton"] -= 1;
-      }
-    });
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
-    DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
-    );
-    if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-      });
-    }
-  }
+  String selectedProduct = 'Adecko 24 EC';
+  String selectedPackSize = '40x25ml';
+  int quantity1 = 3;
+  int quantity2 = 1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF121212),
+      backgroundColor: const Color(0xFF191A22),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF181818),
-        title: const Text("Place Order"),
-        centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.white),
-        titleTextStyle: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
+        backgroundColor: const Color(0xFF1C1C1E),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
+        title: const Text(
+          'Place Order',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDateSelector(),
+              // Date Section
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF292B3E),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: 4,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        const Text(
+                          '21-Nov-2024',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.white, // White border color
+                          width: 1, // Border width
+                        ),
+                        borderRadius: BorderRadius.circular(4), // Optional: Add border radius
+                      ),
+                      child: TextButton.icon(
+                        onPressed: () {},
+                        icon: const Icon(Icons.calendar_month, size: 18, color: Colors.white),
+                        label: const Text(
+                          'Change Date',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               const SizedBox(height: 16),
-              _buildCustomerInfo(),
+
+              // Customer Info
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF282838),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'M/S Vai Vai Treders',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.green.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: const Text(
+                            'NOD',
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Code: 123456',
+                      style: TextStyle(color: Colors.grey[400]),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Address: Dhaka',
+                      style: TextStyle(color: Colors.grey[400]),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Phone: 01732222222',
+                      style: TextStyle(color: Colors.grey[400]),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // Product Selection
+              const Text(
+                'Select Product',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF282838),
+                  border: Border.all(
+                    color: Colors.white, // White border color
+                    width: 2, // Border width
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: selectedProduct,
+                    isExpanded: true,
+                    dropdownColor: const Color(0xFF282838),
+                    style: const TextStyle(color: Colors.white),
+                    icon: const Icon(Icons.keyboard_arrow_down, color: Colors.white),
+                    items: ['Adecko 24 EC'].map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      if (newValue != null) {
+                        setState(() {
+                          selectedProduct = newValue;
+                        });
+                      }
+                    },
+                  ),
+                ),
+              ),
               const SizedBox(height: 16),
-              _buildDropdown("Select Product", selectedProduct, ["Adecko 24 EC"], (value) {
-                setState(() {
-                  selectedProduct = value!;
-                });
-              }),
-              const SizedBox(height: 12),
-              _buildDropdown("Select Pack Size", selectedPackSize, ["40x25ml"], (value) {
-                setState(() {
-                  selectedPackSize = value!;
-                });
-              }),
-              const SizedBox(height: 16),
-              _buildProductTable(),
-              const SizedBox(height: 16),
-              _buildOrderSummary(),
-              const SizedBox(height: 16),
+
+              // Pack Size Selection
+              const Text(
+                'Select Pack Size',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+
+                decoration: BoxDecoration(
+                  color: const Color(0xFF282838),
+                  border: Border.all(
+                    color: Colors.white, // White border color
+                    width: 2, // Border width
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: selectedPackSize,
+                    isExpanded: true,
+                    dropdownColor: const Color(0xFF282838),
+                    style: const TextStyle(color: Colors.white),
+                    icon: const Icon(Icons.keyboard_arrow_down, color: Colors.white),
+                    items: ['40x25ml'].map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      if (newValue != null) {
+                        setState(() {
+                          selectedPackSize = newValue;
+                        });
+                      }
+                    },
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // Product Information
+              const Text(
+                'Product Information',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                child: Column(
+                  children: [
+                    _buildInfoHeader(),
+                     const SizedBox(height: 8),
+                    _buildInfoRow('Adecko 24 EC', '40x25ml', '9,900', quantity1),
+                    const SizedBox(height: 8),
+                    _buildInfoRow('Adecko 24 EC', '40x25ml', '3,300', quantity2),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // Order Summary
+              const Text(
+                'Order Summary View',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+
+                child: Column(
+                  children: [
+                    _buildSummaryHeader(), const SizedBox(height: 8),
+                    _buildSummaryRow('Adecko 24 EC', '40x25ml', '3', '9,900'), const SizedBox(height: 8),
+                    _buildSummaryRow('Adecko 24 EC', '40x25ml', '1', '3,300'),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 32),
+
+              // Action Buttons
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5), // Reduced border radius
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        'SAVE ORDER',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF585858),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5), // Reduced border radius
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        'SUBMIT ORDER',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: _buildBottomButtons(),
     );
   }
 
-  Widget _buildDateSelector() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text("${selectedDate.toLocal()}".split(' ')[0], style: const TextStyle(color: Colors.white, fontSize: 16)),
-        ElevatedButton(
-          onPressed: () => _selectDate(context),
-          child: const Text("Change Date"),
-        ),
-      ],
-    );
-  }
-  Widget _buildProductTable() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text("Product List", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500)),
-        const SizedBox(height: 8),
-        Table(
-          border: TableBorder.all(color: Colors.white),
-          columnWidths: const {
-            0: FlexColumnWidth(3),
-            1: FlexColumnWidth(2),
-            2: FlexColumnWidth(2),
-            3: FlexColumnWidth(1),
-          },
-          children: [
-            TableRow(
+  Widget _buildInfoHeader() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      decoration: BoxDecoration(
+        color: Color(0xFF4E409E),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 7,
+            child: Row(
               children: [
-                _buildTableHeader("Product"),
-                _buildTableHeader("Pack Size"),
-                _buildTableHeader("TP (₹)"),
-                _buildTableHeader("Cartons"),
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      'Product',
+                      style: TextStyle(color: Colors.white),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 3,
+                  height: 20,
+                  color: Colors.orange,
+                ),
               ],
             ),
-            for (int i = 0; i < orderList.length; i++)
-              TableRow(
-                children: [
-                  _buildTableCell(orderList[i]["product"]),
-                  _buildTableCell(orderList[i]["packSize"]),
-                  _buildTableCell(orderList[i]["tp"].toString()),
-                  _buildCartonCell(i),
-                ],
+          ),
+          Expanded(
+            flex: 6,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      'Pack Size',
+                      style: TextStyle(color: Colors.white),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 3,
+                  height: 20,
+                  color: Colors.orange,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 4,
+            child: Row(
+              children: [
+                 Expanded(
+                  child: Center(
+                    child: Text(
+                      'TP',
+                      style: TextStyle(color: Colors.white),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 3,
+                  height: 20,
+                  color: Colors.orange,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 8,
+            child: Center(
+              child: Text(
+                'Carton',
+                style: TextStyle(color: Colors.white),
+                overflow: TextOverflow.ellipsis,
               ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildTableHeader(String text) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(text, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Widget _buildTableCell(String text) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(text, style: const TextStyle(color: Colors.white)),
-    );
-  }
-
-  Widget _buildCartonCell(int index) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.remove, color: Colors.white),
-          onPressed: () => _decrementCarton(index),
-        ),
-        Text(orderList[index]["carton"].toString(), style: const TextStyle(color: Colors.white)),
-        IconButton(
-          icon: const Icon(Icons.add, color: Colors.white),
-          onPressed: () => _incrementCarton(index),
-        ),
-      ],
-    );
-  }
-  Widget _buildCustomerInfo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text("Customer Information", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500)),
-        const SizedBox(height: 8),
-        TextField(
-          style: const TextStyle(color: Colors.white),
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: const Color(0xFF282838),
-            hintText: 'Customer Name',
-            hintStyle: const TextStyle(color: Colors.white70),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-          ),
-        ),
-        const SizedBox(height: 8),
-        TextField(
-          style: const TextStyle(color: Colors.white),
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: const Color(0xFF282838),
-            hintText: 'Customer Address',
-            hintStyle: const TextStyle(color: Colors.white70),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-          ),
-        ),
-        const SizedBox(height: 8),
-        TextField(
-          style: const TextStyle(color: Colors.white),
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: const Color(0xFF282838),
-            hintText: 'Phone Number',
-            hintStyle: const TextStyle(color: Colors.white70),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildDropdown(String label, String value, List<String> items, ValueChanged<String?> onChanged) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: const TextStyle(color: Colors.white, fontSize: 16)),
-        const SizedBox(height: 8),
-        DropdownButtonFormField<String>(
-          value: value,
-          dropdownColor: const Color(0xFF282838),
-          items: items.map((e) => DropdownMenuItem(value: e, child: Text(e, style: const TextStyle(color: Colors.white)))).toList(),
-          onChanged: onChanged,
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: const Color(0xFF282838),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildOrderSummary() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text("Order Summary View", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500)),
-        const SizedBox(height: 8),
-        Column(
-          children: orderList.map((order) => Text("${order["product"]} - ${order["carton"]} cartons - TP: ${order["tp"]}", style: const TextStyle(color: Colors.white))).toList(),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildBottomButtons() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text("SAVE ORDER"),
             ),
-            const SizedBox(width: 8), // Add spacing between buttons
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text("SUBMIT ORDER"),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
+  Widget _buildInfoRow(String product, String packSize, String tp, int quantity) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 16),
+      height: 30,
+      decoration: BoxDecoration(
+        color: const Color(0xFF292B3E),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 7,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      product,
+                      style: const TextStyle(color: Colors.white,fontSize: 12 ,fontWeight:FontWeight.bold),
+                      overflow: TextOverflow.clip,
+                      softWrap: true,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 3,
+                  height: 20,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 6,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      packSize,
+                      style: const TextStyle(color: Colors.white,fontSize: 12 ,fontWeight:FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 3,
+                  height: 20,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 4,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      tp,
+                      style: const TextStyle(color: Colors.white,fontSize: 12 ,fontWeight:FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 3,
+                  height: 20,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 8,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                  icon: const Icon(Icons.remove, color: Colors.white, size: 20),
+                  onPressed: () {},
+                ),
+                // const SizedBox(width: 8),
+                Text(
+                  quantity.toString(),
+                  style: const TextStyle(color: Colors.white,fontSize: 12 ,fontWeight:FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                // const SizedBox(width: 8),
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                  icon: const Icon(Icons.add, color: Colors.white, size: 20),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
+  Widget _buildSummaryHeader() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      decoration: BoxDecoration(
+        color: Color(0xFF4E409E),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: Row(
+              children: [
+                 Expanded(
+                  child: Center(
+                    child: Text(
+                      'Product Name',
+                      style: TextStyle(color: Colors.white),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Container(
+                    width: 3,
+                    height: 20,
+                    color: Colors.orange
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      'Pack Size',
+                      style: TextStyle(color: Colors.white),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Container(
+                    width: 3,
+                    height: 20,
+                    color: Colors.orange
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Row(
+              children: [
+                 Expanded(
+                  child: Center(
+                    child: Text(
+                      'Carton',
+                      style: TextStyle(color: Colors.white),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Container(
+                    width: 3,
+                    height: 20,
+                    color: Colors.orange
+                ),
+              ],
+            ),
+          ),
+           Expanded(
+            flex: 2,
+            child: Center(
+              child: Text(
+                'TP',
+                style: TextStyle(color: Colors.white),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSummaryRow(String product, String packSize, String carton, String tp) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 16),
+      height: 30,
+      decoration: BoxDecoration(
+        color: const Color(0xFF292B3E),
+        borderRadius: BorderRadius.circular(20),
+      ), child: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      product,
+                      style: const TextStyle(color: Colors.white,fontSize: 12 ,fontWeight:FontWeight.bold),
+                      overflow: TextOverflow.clip,
+                      softWrap: true,
+                    ),
+                  ),
+                ),
+                Container(
+                    width: 3,
+                    height: 20,
+                    color: Colors.white
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      packSize,
+                      style: const TextStyle(color: Colors.white,fontSize: 12 ,fontWeight:FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Container(
+                    width: 3,
+                    height: 20,
+                    color: Colors.white
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      carton,
+                      style: const TextStyle(color: Colors.white,fontSize: 12 ,fontWeight:FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 3,
+                  height: 20,
+                  color: Colors.white
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Center(
+              child: Text(
+                tp,
+                style: const TextStyle(color: Colors.white,fontSize: 12 ,fontWeight:FontWeight.bold),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
