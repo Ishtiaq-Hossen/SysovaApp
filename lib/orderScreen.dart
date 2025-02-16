@@ -6,9 +6,10 @@ class OrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1C1C1E),
+      backgroundColor: const Color(0xFF191A22),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1C1C1E),
+        centerTitle: true,
+        backgroundColor: const Color(0xFF191A22),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
@@ -23,23 +24,20 @@ class OrdersScreen extends StatelessWidget {
         children: const [
           OrderCard(
             status: 'Pending',
-            statusColor: Colors.red,
           ),
           SizedBox(height: 16),
           OrderCard(
             status: 'Approved',
-            statusColor: Colors.blue,
           ),
           SizedBox(height: 16),
           OrderCard(
             status: 'Completed',
-            statusColor: Colors.green,
           ),
         ],
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFF282830),
+          color: const Color(0xFF292B3E),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
@@ -83,22 +81,49 @@ class OrdersScreen extends StatelessWidget {
   }
 }
 
-class OrderCard extends StatelessWidget {
+class OrderCard extends StatefulWidget {
   final String status;
-  final Color statusColor;
-
   const OrderCard({
     Key? key,
     required this.status,
-    required this.statusColor,
   }) : super(key: key);
+
+  @override
+  State<OrderCard> createState() => _OrderCardState();
+}
+
+class _OrderCardState extends State<OrderCard> {
+  late String displayText;
+  late Color displayColor;
+
+  @override
+  void initState() {
+    super.initState();
+    _updateDisplayTextAndColor();
+  }
+
+  void _updateDisplayTextAndColor() {
+    if (widget.status == 'Pending') {
+      displayText = 'OD';
+      displayColor = Colors.red;
+    } else if (widget.status == 'Completed') {
+      displayText = 'NOD';
+      displayColor = Colors.green;
+    } else if (widget.status == 'Approved') {
+      displayText = 'NOD';
+      displayColor = Colors.green;
+    } else {
+      displayText = '';
+      displayColor = Colors.transparent;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF282830),
+        color: const Color(0xFF292B3E),
         borderRadius: BorderRadius.circular(8),
       ),
       child: IntrinsicHeight(
@@ -123,10 +148,22 @@ class OrderCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Icon(
-                        Icons.copy,
-                        size: 16,
-                        color: Colors.grey[400],
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: displayColor.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          displayText,
+                          style: TextStyle(
+                            color: displayColor,
+                            fontSize: 12,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -163,7 +200,7 @@ class OrderCard extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start, // Align all content to the left
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
@@ -209,6 +246,8 @@ class OrderCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Container(
+                    width: 120,
+                    height: 20,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 8,
                       vertical: 4,
@@ -217,12 +256,32 @@ class OrderCard extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: Text(
-                      'Status: $status',
-                      style: TextStyle(
-                        color: statusColor,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          const TextSpan(
+                            text: 'Status: ',
+                            style: TextStyle(
+                              color: Colors.black, // "Status:" text is black
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12,
+                            ),
+                          ),
+                          TextSpan(
+                            text: widget.status,
+                            style: TextStyle(
+                              color: widget.status == 'Pending'
+                                  ? Colors.red
+                                  : widget.status == 'Completed'
+                                  ? Colors.green
+                                  : widget.status == 'Approved'
+                                  ? Colors.blue
+                                  : Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
