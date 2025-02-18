@@ -6,9 +6,10 @@ class ReportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1B25),
+      backgroundColor: const Color(0xFF191A22),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1A1B25),
+        centerTitle: true,
+        backgroundColor: const Color(0xFF191A22),
         elevation: 0,
         title: const Text(
           'Report',
@@ -72,7 +73,7 @@ class ReportPage extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFF282935),
+          color: const Color(0xFF292B3E),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
@@ -99,7 +100,7 @@ class ReportPage extends StatelessWidget {
 
   Widget _buildBottomNavigationBar() {
     return Container(
-      color: const Color(0xFF282935),
+      color: const Color(0xFF292B3E),
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

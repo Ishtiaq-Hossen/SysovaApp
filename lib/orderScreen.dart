@@ -205,7 +205,7 @@ class _OrderCardState extends State<OrderCard> {
                   Row(
                     children: [
                       Icon(
-                        Icons.calendar_today,
+                        Icons.calendar_month,
                         size: 14,
                         color: Colors.grey[400],
                       ),

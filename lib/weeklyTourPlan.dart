@@ -17,15 +17,15 @@ class _WeeklyTourPlanScreenState extends State<WeeklyTourPlanScreen> {
   String? selectedWorkType;
 
   final List<String> days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  final List<String> tourTypes = ["Business", "Leisure", "Adventure"];
+  final List<String> tourTypes = ["Dealer contact", "Retailer contact", "Agricultural office visit","Farmer meeting","Field visit"];
   final List<String> workTypes = ["Field Work", "Office Work", "Remote Work"];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF121212), // Dark background
+      backgroundColor: const Color(0xFF191A22), // Dark background
       appBar: AppBar(
-        backgroundColor: const Color(0xFF181818), // Slightly lighter for visibility
+        backgroundColor: const Color(0xFF191A22), // Slightly lighter for visibility
         title: const Text("Weekly Tour Plan"),
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white), // Ensures back button is white
@@ -45,31 +45,59 @@ class _WeeklyTourPlanScreenState extends State<WeeklyTourPlanScreen> {
           children: [
             // Play Day Row
             Container(
+              height: 60,
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
               decoration: BoxDecoration(
-                color: const Color(0xFF282838),
+                color: const Color(0xFF292B3E),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
                 children: [
-                  const Text("Play Day", style: TextStyle(color: Colors.white, fontSize: 16)),
-                  const Spacer(),
-                  DropdownButton<String>(
-                    value: selectedDay,
-                    icon: const Icon(Icons.calendar_today, color: Colors.white),
-                    dropdownColor: const Color(0xFF282838),
-                    style: const TextStyle(color: Colors.white),
-                    underline: const SizedBox(),
-                    onChanged: (newValue) {
-                      setState(() => selectedDay = newValue!);
-                    },
-                    items: days.map((day) {
-                      return DropdownMenuItem(
-                        value: day,
-                        child: Text(day, style: const TextStyle(color: Colors.white)),
-                      );
-                    }).toList(),
+                  Row(
+                    children: [
+                      // Red bar
+                      Container(
+                        width: 4, // Width of the red bar
+                        height: 20, // Height of the red bar (matches text height)
+                        margin: const EdgeInsets.only(right: 8), // Space between the bar and text
+                        color: Colors.red, // Color of the bar
+                      ),
+                      // "Play Day" text
+                      const Text(
+                        "Play Day",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ],
                   ),
+                  const Spacer(),
+                  Container(
+
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white, // White outline color
+                        width: 1,// Outline thickness
+                      ),
+                      borderRadius: BorderRadius.circular(10), // Optional: Add rounded corners
+                    ),
+                    padding: const EdgeInsets.all(8), //
+                    child: DropdownButton<String>(
+
+                      value: selectedDay,
+                      icon: const Icon(Icons.calendar_month, color: Colors.white),
+                      dropdownColor: const Color(0xFF191A22),
+                      style: const TextStyle(color: Colors.white),
+                      underline: const SizedBox(), // Remove the default underline
+                      onChanged: (newValue) {
+                        setState(() => selectedDay = newValue!);
+                      },
+                      items: days.map((day) {
+                        return DropdownMenuItem(
+                          value: day,
+                          child: Text(day, style: const TextStyle(color: Colors.white)),
+                        );
+                      }).toList(),
+                    ),
+                  )
                 ],
               ),
             ),
@@ -89,15 +117,14 @@ class _WeeklyTourPlanScreenState extends State<WeeklyTourPlanScreen> {
             _buildDropdown("Select your work type", workTypes, selectedWorkType, (value) {
               setState(() => selectedWorkType = value);
             }),
-            const SizedBox(height: 32),
-
+            const SizedBox(height: 150),
             // Submit Button
             SizedBox(
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2E2E3A),
+                  backgroundColor: const Color(0xFF292B3E),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),
                 onPressed: () {},
@@ -110,7 +137,7 @@ class _WeeklyTourPlanScreenState extends State<WeeklyTourPlanScreen> {
 
       // Bottom Navigation Bar
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFF181818),
+        backgroundColor: const Color(0xFF292B3E),
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
         items: const [
@@ -127,7 +154,7 @@ class _WeeklyTourPlanScreenState extends State<WeeklyTourPlanScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFF282838),
+        color: const Color(0xFF191A22),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Colors.grey.shade700),
       ),
@@ -135,7 +162,7 @@ class _WeeklyTourPlanScreenState extends State<WeeklyTourPlanScreen> {
         child: DropdownButton<String>(
           value: selectedValue,
           hint: Text(hint, style: const TextStyle(color: Colors.grey)),
-          dropdownColor: const Color(0xFF282838),
+          dropdownColor: const Color(0xFF292B3E),
           icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
           isExpanded: true,
           onChanged: onChanged,

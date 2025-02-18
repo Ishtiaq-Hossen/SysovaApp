@@ -6,9 +6,10 @@ class OrderTrackingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1C1C1E),
+      backgroundColor: const Color(0xFF191A22),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1C1C1E),
+        centerTitle: true,
+        backgroundColor: const Color(0xFF191A22),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
@@ -34,12 +35,12 @@ class OrderTrackingScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(4),
+              // borderRadius: BorderRadius.circular(4),
               child: LinearProgressIndicator(
                 value: 0.8,
-                backgroundColor: Colors.grey[800],
-                valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
-                minHeight: 8,
+                backgroundColor: Colors.white,
+                valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF4C5EFF)),
+                minHeight: 10,
               ),
             ),
           ),
@@ -65,7 +66,7 @@ class OrderTrackingScreen extends StatelessWidget {
             isCompleted: true,
           ),
           _buildStatusCard(
-            icon: Icons.person_outline,
+            icon: Icons.person_2,
             title: 'Approved',
             subtitle: 'Your order has been approved',
             isCompleted: true,
@@ -102,7 +103,7 @@ class OrderTrackingScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFF282838),
+        color: const Color(0xFF292B3E),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -164,7 +165,7 @@ class OrderTrackingScreen extends StatelessWidget {
   Widget _buildBottomNavBar() {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF282838),
+        color: const Color(0xFF292B3E),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),

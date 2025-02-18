@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
-class DashboardPage extends StatelessWidget {
+class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
 
+  @override
+  State<DashboardPage> createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,10 +73,10 @@ class DashboardPage extends StatelessWidget {
               _buildSectionTitle('Plan & Attend (PA)'),
               const SizedBox(height: 16),
               _buildGridSection([
-                GridItem(Icons.calendar_today, 'Weekly\nplan'),
-                GridItem(Icons.schedule, 'My\nSchedule'),
-                GridItem(Icons.person_3_sharp, 'Attendance'),
-                GridItem(Icons.exit_to_app, 'Leave\nRequest'),
+                GridItem(Icons.calendar_today,'Weekly\nplan','/weekly_plan'),
+                GridItem(Icons.schedule,'My\nSchedule','/schedule'),
+                GridItem(Icons.person_3_sharp,'Attendance','/attendance'),
+                GridItem(Icons.exit_to_app, 'Leave\nRequest','/dashboard'),
               ]),
 
               const SizedBox(height: 24),
@@ -80,9 +85,9 @@ class DashboardPage extends StatelessWidget {
               _buildSectionTitle('Sales & Collection Activities (SCA)'),
               const SizedBox(height: 16),
               _buildGridSection([
-                GridItem(Icons.note_add, 'Place Order'),
-                GridItem(Icons.location_on, 'Track Order'),
-                GridItem(Icons.article, 'Collection'),
+                GridItem(Icons.note_add, 'Place Order','/place_order'),
+                GridItem(Icons.location_on, 'Track Order','/orders'),
+                GridItem(Icons.article, 'Collection','/'),
               ]),
 
               const SizedBox(height: 24),
@@ -136,6 +141,36 @@ class DashboardPage extends StatelessWidget {
     );
   }
 
+  Widget _buildGridItem(BuildContext context, GridItem item, String route) {
+    return GestureDetector(
+      onTap: () {
+        // Navigate to the specified route
+        Navigator.pushNamed(context, route);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color(0xFF282935),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(item.icon, color: Colors.white, size: 24),
+            const SizedBox(height: 8),
+            Text(
+              item.title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildGridSection(List<GridItem> items) {
     return GridView.count(
       shrinkWrap: true,
@@ -144,33 +179,10 @@ class DashboardPage extends StatelessWidget {
       childAspectRatio: 0.9,
       mainAxisSpacing: 16,
       crossAxisSpacing: 16,
-      children: items.map((item) => _buildGridItem(item)).toList(),
+      children: items.map((item) => _buildGridItem(context,item, item.route)).toList(),
     );
   }
 
-  Widget _buildGridItem(GridItem item) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF282935),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(item.icon, color: Colors.white, size: 24),
-          const SizedBox(height: 8),
-          Text(
-            item.title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _buildDashboardCard(String title, String value) {
     return Container(
@@ -210,38 +222,69 @@ class DashboardPage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildBottomNavItem(Icons.home, 'Home', true),
-          _buildBottomNavItem(Icons.business, 'Report', false),
-          _buildBottomNavItem(Icons.person, 'My Profile', false),
+          _buildBottomNavItem(
+            context,
+            Icons.home,
+            'Home',
+            '/', // Example route for Home screen
+            true,  // Is selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.business,
+            'Report',
+            '/reports', // Example route for Report screen
+            false, // Not selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.person,
+            'My Profile',
+            '/', // Example route for Profile screen
+            false, // Not selected
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildBottomNavItem(IconData icon, String label, bool isSelected) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(
-          icon,
-          color: isSelected ? Colors.white : Colors.grey,
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(
+  Widget _buildBottomNavItem(BuildContext context, IconData icon, String label, String route, bool isSelected) {
+    return GestureDetector(
+      onTap: () {
+        if (route == '/') {
+          // Use a route for the '/' case
+          Navigator.pushReplacementNamed(context, '/dashboard');  // Assuming '/dashboard' is defined in routes
+        } else {
+          // For other routes, use Navigator.pushNamed
+          Navigator.pushNamed(context, route);
+        }
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
             color: isSelected ? Colors.white : Colors.grey,
-            fontSize: 12,
           ),
-        ),
-      ],
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.grey,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
     );
   }
+
 }
 
 class GridItem {
   final IconData icon;
   final String title;
+  final String route; // New route field
 
-  GridItem(this.icon, this.title);
+  GridItem(this.icon, this.title, this.route);
 }
