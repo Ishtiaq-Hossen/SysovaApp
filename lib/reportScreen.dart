@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hella/dashboardScreen.dart';
 
 class ReportPage extends StatelessWidget {
   const ReportPage({Key? key}) : super(key: key);
@@ -21,8 +22,17 @@ class ReportPage extends StatelessWidget {
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            if (Navigator.canPop(context)) {
+              print("Hobe na dada ${Navigator.canPop(context)} \n ==========");
+              Navigator.pop(context);
+            } else {
+              print("Hobe dada ${Navigator.canPop(context)} \n ==========");
+              Navigator.pushReplacementNamed(context, '/dashboard');
+            }
+          }
         ),
+        // actions: const [Icon(Icons.more_vert)],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -38,12 +48,16 @@ class ReportPage extends StatelessWidget {
                 _buildReportCard(
                   icon: Icons.person_3_sharp,
                   label: 'Attendance',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/attendance_report'); //
+                  },
                 ),
                 _buildReportCard(
                   icon: Icons.receipt_long,
                   label: 'Order',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/order_summary');
+                  },
                 ),
                 _buildReportCard(
                   icon: Icons.description,
@@ -60,7 +74,7 @@ class ReportPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      bottomNavigationBar: _buildBottomNavigationBar(context, '/reports'),
     );
   }
 
@@ -98,38 +112,65 @@ class ReportPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNavigationBar() {
+  Widget _buildBottomNavigationBar(BuildContext context, String currentRoute) {
     return Container(
-      color: const Color(0xFF292B3E),
+      color: const Color(0xFF282935),
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildBottomNavItem(Icons.home, 'Home', false),
-          _buildBottomNavItem(Icons.business, 'Report', true),
-          _buildBottomNavItem(Icons.person, 'My Profile', false),
+          _buildBottomNavItem(
+            context,
+            Icons.home,
+            'Home',
+            '/dashboard', // Route for Home
+            currentRoute == '/', // Check if selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.business,
+            'Report',
+            '/reports', // Route for Report
+            currentRoute == '/reports', // Check if selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.person,
+            'Profile',
+            '/', // Route for Profile
+            currentRoute == '/', // Check if selected
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildBottomNavItem(IconData icon, String label, bool isSelected) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(
-          icon,
-          color: isSelected ? Colors.white : Colors.grey,
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(
+  Widget _buildBottomNavItem(BuildContext context, IconData icon, String label,
+      String route, bool isSelected) {
+    return GestureDetector(
+      onTap: () {
+        if(route=='/dashboard')
+          Navigator.pushNamedAndRemoveUntil(context, route, (route)=>false);
+        else
+          Navigator.pushNamed(context, route);
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
             color: isSelected ? Colors.white : Colors.grey,
-            fontSize: 12,
           ),
-        ),
-      ],
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.grey,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

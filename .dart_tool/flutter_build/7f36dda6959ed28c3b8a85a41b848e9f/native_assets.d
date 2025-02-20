@@ -1,0 +1,1 @@
+ /home/app-sysnova1/Desktop/StudioProject/hella/.dart_tool/flutter_build/7f36dda6959ed28c3b8a85a41b848e9f/native_assets.yaml: 

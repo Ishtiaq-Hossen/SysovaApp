@@ -32,7 +32,7 @@ class OrderSummary extends StatelessWidget {
                   child: Container(
                     height: 50,
                     padding: const EdgeInsets.symmetric(vertical: 10),
-                    margin: EdgeInsets.symmetric(vertical: 10,horizontal: 5),
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(25),
@@ -41,10 +41,9 @@ class OrderSummary extends StatelessWidget {
                       child: Text(
                         'Customer Wise',
                         style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 22
-                        ),
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 22),
                       ),
                     ),
                   ),
@@ -63,10 +62,9 @@ class OrderSummary extends StatelessWidget {
                       child: Text(
                         'Product Wise',
                         style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 22
-                        ),
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 22),
                       ),
                     ),
                   ),
@@ -182,7 +180,8 @@ class OrderSummary extends StatelessWidget {
             // Gap with body color
 
             Container(
-              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5), decoration: BoxDecoration(
+              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+              decoration: BoxDecoration(
                 color: Color(0xFF292B3E),
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(8),
@@ -203,7 +202,8 @@ class OrderSummary extends StatelessWidget {
 
             // Total Row
             Container(
-              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),              decoration: const BoxDecoration(
+              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+              decoration: const BoxDecoration(
                 color: Color(0xFF1E7597),
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(8),
@@ -279,32 +279,94 @@ class OrderSummary extends StatelessWidget {
                   ),
                 ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _BottomNavItem(
-                    icon: Icons.home_outlined,
-                    label: 'Home',
-                    isSelected: false,
-                    onTap: () {},
-                  ),
-                  _BottomNavItem(
-                    icon: Icons.assessment_outlined,
-                    label: 'Report',
-                    isSelected: true,
-                    onTap: () {},
-                  ),
-                  _BottomNavItem(
-                    icon: Icons.person_outline,
-                    label: 'My Profile',
-                    isSelected: false,
-                    onTap: () {},
-                  ),
-                ],
-              ),
+              // child: Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //   children: [
+              //     _BottomNavItem(
+              //       icon: Icons.home_outlined,
+              //       label: 'Home',
+              //       isSelected: false,
+              //       onTap: () {},
+              //     ),
+              //     _BottomNavItem(
+              //       icon: Icons.assessment_outlined,
+              //       label: 'Report',
+              //       isSelected: true,
+              //       onTap: () {},
+              //     ),
+              //     _BottomNavItem(
+              //       icon: Icons.person_outline,
+              //       label: 'My Profile',
+              //       isSelected: false,
+              //       onTap: () {},
+              //     ),
+              //   ],
+              // ),
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: _buildBottomNavigationBar(context, '/'),
+    );
+  }
+  Widget _buildBottomNavigationBar(BuildContext context, String currentRoute) {
+    return Container(
+      color: const Color(0xFF282935),
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildBottomNavItem(
+            context,
+            Icons.home,
+            'Home',
+            '/dashboard', // Route for Home
+            currentRoute == '/', // Check if selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.business,
+            'Report',
+            '/reports', // Route for Report
+            currentRoute == '/', // Check if selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.person,
+            'Profile',
+            '/', // Route for Profile
+            currentRoute == '/', // Check if selected
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomNavItem(BuildContext context, IconData icon, String label,
+      String route, bool isSelected) {
+    return GestureDetector(
+      onTap: () {
+        if(route=='/dashboard')
+          Navigator.pushNamedAndRemoveUntil(context, route, (route)=>false);
+        else
+          Navigator.pushNamed(context, route);
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            color: isSelected ? Colors.white : Colors.grey,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.grey,
+              fontSize: 12,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -324,6 +386,7 @@ class _VerticalDivider extends StatelessWidget {
     );
   }
 }
+
 class _VerticalDividerV2 extends StatelessWidget {
   final Color color;
 

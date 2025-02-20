@@ -39,7 +39,8 @@ class OrderTrackingScreen extends StatelessWidget {
               child: LinearProgressIndicator(
                 value: 0.8,
                 backgroundColor: Colors.white,
-                valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF4C5EFF)),
+                valueColor:
+                    const AlwaysStoppedAnimation<Color>(Color(0xFF4C5EFF)),
                 minHeight: 10,
               ),
             ),
@@ -85,9 +86,9 @@ class OrderTrackingScreen extends StatelessWidget {
             isLast: true,
           ),
           const Spacer(),
-          _buildBottomNavBar(),
         ],
       ),
+      bottomNavigationBar: _buildBottomNavigationBar(context, '/tracking'),
     );
   }
 
@@ -111,12 +112,15 @@ class OrderTrackingScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: isCompleted ? Colors.blue.withOpacity(0.1) : Colors.grey.withOpacity(0.1),
+              color: isCompleted
+                  ? Colors.blue.withOpacity(0.1)
+                  : Colors.grey.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
               icon,
-              color: iconColor ?? (isCompleted ? Colors.white : Colors.grey), // Apply custom color or default
+              color: iconColor ?? (isCompleted ? Colors.white : Colors.grey),
+              // Apply custom color or default
               size: 24,
             ),
           ),
@@ -162,48 +166,65 @@ class OrderTrackingScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNavBar() {
+  Widget _buildBottomNavigationBar(BuildContext context, String currentRoute) {
     return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF292B3E),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
+      color: const Color(0xFF282935),
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildBottomNavItem(
+            context,
+            Icons.home,
+            'Home',
+            '/dashboard', // Route for Home
+            currentRoute == '/', // Check if selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.business,
+            'Report',
+            '/reports', // Route for Report
+            currentRoute == '/', // Check if selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.person,
+            'Profile',
+            '/', // Route for Profile
+            currentRoute == '/', // Check if selected
           ),
         ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildNavItem(Icons.home_outlined, 'Home', false),
-            _buildNavItem(Icons.assessment_outlined, 'Report', true),
-            _buildNavItem(Icons.person_outline, 'My Profile', false),
-          ],
-        ),
       ),
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, bool isSelected) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(
-          icon,
-          color: isSelected ? Colors.white : Colors.grey,
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(
+  Widget _buildBottomNavItem(BuildContext context, IconData icon, String label,
+      String route, bool isSelected) {
+    return GestureDetector(
+      onTap: () {
+        if(route=='/dashboard')
+          Navigator.pushNamedAndRemoveUntil(context, route, (route)=>false);
+        else
+          Navigator.pushNamed(context, route);
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
             color: isSelected ? Colors.white : Colors.grey,
-            fontSize: 12,
           ),
-        ),
-      ],
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.grey,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

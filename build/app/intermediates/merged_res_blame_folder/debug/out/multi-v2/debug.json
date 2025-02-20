@@ -320,6 +320,25 @@
                     }
                 },
                 {
+                    "source": "/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "173,818",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "476,982"
+                    },
+                    "to": {
+                        "startLines": "183,187",
+                        "startColumns": "4,4",
+                        "startOffsets": "11054,11235",
+                        "endLines": "186,189",
+                        "endColumns": "12,12",
+                        "endOffsets": "11230,11399"
+                    }
+                },
+                {
                     "source": "/home/app-sysnova1/.gradle/caches/transforms-3/ca4d40f38b71d4c621d36eba6fe2f4a4/transformed/fragment-1.7.1/res/values/values.xml",
                     "from": {
                         "startLines": "2,3,4,5,10",
@@ -427,25 +446,6 @@
                         "endLines": "25,55,56,57,58,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,129,130,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,155,157,158,159,160,161,162,163,182,190,194,195,199,200,201,202,231,241,274,295,337,343",
                         "endColumns": "59,71,87,64,65,68,62,69,67,71,69,60,73,72,60,60,61,63,61,60,67,99,59,65,72,68,56,51,61,71,75,64,58,58,59,59,59,59,59,59,59,59,59,59,58,59,59,59,59,59,59,59,59,59,59,58,59,59,58,58,58,58,58,58,34,34,54,62,54,57,57,60,62,56,50,49,60,56,65,33,34,34,69,66,71,68,68,73,71,87,70,116,12,109,12,128,71,66,24,24,24,24,24,24",
                         "endOffsets": "830,1840,1928,1993,2059,2799,2862,2932,3000,3072,3142,3203,3277,3350,3411,3472,3534,3598,3660,3721,3789,3889,3949,4015,4088,4157,4214,4266,4328,4400,4476,4541,4600,4659,4719,4779,4839,4899,4959,5019,5079,5139,5199,5259,5318,5378,5438,5498,5558,5618,5678,5738,5798,5858,5918,5977,6037,6097,6156,6215,6274,6333,6392,6451,6641,6676,6838,6901,6956,7014,7072,7133,7196,7253,7304,7354,7415,7472,7538,7572,7607,7642,8051,8201,8273,8342,8411,8485,8557,8645,11049,11516,11717,11827,12028,12157,12229,12296,13472,13773,15504,16185,17186,17353"
-                    }
-                },
-                {
-                    "source": "/home/app-sysnova1/StudioProjects/hella/android/app/src/main/res/values/styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "173,818",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "476,982"
-                    },
-                    "to": {
-                        "startLines": "183,187",
-                        "startColumns": "4,4",
-                        "startOffsets": "11054,11235",
-                        "endLines": "186,189",
-                        "endColumns": "12,12",
-                        "endOffsets": "11230,11399"
                     }
                 },
                 {
@@ -3511,7 +3511,7 @@
             "outputFile": "com.example.hella.app-merged_res-30:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
-                    "source": "/home/app-sysnova1/StudioProjects/hella/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

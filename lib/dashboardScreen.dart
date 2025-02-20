@@ -73,10 +73,10 @@ class _DashboardPageState extends State<DashboardPage> {
               _buildSectionTitle('Plan & Attend (PA)'),
               const SizedBox(height: 16),
               _buildGridSection([
-                GridItem(Icons.calendar_today,'Weekly\nplan','/weekly_plan'),
-                GridItem(Icons.schedule,'My\nSchedule','/schedule'),
-                GridItem(Icons.person_3_sharp,'Attendance','/attendance'),
-                GridItem(Icons.exit_to_app, 'Leave\nRequest','/dashboard'),
+                GridItem(Icons.calendar_today, 'Weekly\nplan', '/weekly_plan'),
+                GridItem(Icons.schedule, 'My\nSchedule', '/schedule'),
+                GridItem(Icons.person_3_sharp, 'Attendance', '/attendance'),
+                GridItem(Icons.exit_to_app, 'Leave\nRequest', '/dashboard'),
               ]),
 
               const SizedBox(height: 24),
@@ -85,9 +85,9 @@ class _DashboardPageState extends State<DashboardPage> {
               _buildSectionTitle('Sales & Collection Activities (SCA)'),
               const SizedBox(height: 16),
               _buildGridSection([
-                GridItem(Icons.note_add, 'Place Order','/place_order'),
-                GridItem(Icons.location_on, 'Track Order','/orders'),
-                GridItem(Icons.article, 'Collection','/'),
+                GridItem(Icons.note_add, 'Place Order', '/place_order'),
+                GridItem(Icons.location_on, 'Track Order', '/orders'),
+                GridItem(Icons.article, 'Collection', '/'),
               ]),
 
               const SizedBox(height: 24),
@@ -179,10 +179,11 @@ class _DashboardPageState extends State<DashboardPage> {
       childAspectRatio: 0.9,
       mainAxisSpacing: 16,
       crossAxisSpacing: 16,
-      children: items.map((item) => _buildGridItem(context,item, item.route)).toList(),
+      children: items
+          .map((item) => _buildGridItem(context, item, item.route))
+          .toList(),
     );
   }
-
 
   Widget _buildDashboardCard(String title, String value) {
     return Container(
@@ -226,8 +227,8 @@ class _DashboardPageState extends State<DashboardPage> {
             context,
             Icons.home,
             'Home',
-            '/', // Example route for Home screen
-            true,  // Is selected
+            '/dashboard', // Example route for Home screen
+            true, // Is selected
           ),
           _buildBottomNavItem(
             context,
@@ -248,16 +249,15 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  Widget _buildBottomNavItem(BuildContext context, IconData icon, String label, String route, bool isSelected) {
+  Widget _buildBottomNavItem(BuildContext context, IconData icon, String label,
+      String route, bool isSelected) {
     return GestureDetector(
       onTap: () {
-        if (route == '/') {
-          // Use a route for the '/' case
-          Navigator.pushReplacementNamed(context, '/dashboard');  // Assuming '/dashboard' is defined in routes
-        } else {
-          // For other routes, use Navigator.pushNamed
+        // For other routes, use Navigator.pushNamed
+        if(route=='/dashboard')
+          Navigator.pushNamedAndRemoveUntil(context, route, (route)=>false);
+        else
           Navigator.pushNamed(context, route);
-        }
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -278,7 +278,6 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
     );
   }
-
 }
 
 class GridItem {
