@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hella/placeOrderScreenTwo.dart';
 
 void main() {
   runApp(const MaterialApp(home: PlaceOrderScreen()));
@@ -106,7 +107,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                 itemCount: filteredCustomers.length,
                 itemBuilder: (context, index) {
                   final customer = filteredCustomers[index];
-                  return _buildCustomerCard(customer);
+                  return _buildCustomerCard(context, customer);
                 },
               ),
             ),
@@ -115,60 +116,133 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
       ),
 
       // Bottom Navigation Bar
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFF292B3E),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.arrow_back), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: "Report"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "My Profile"),
+      bottomNavigationBar: _buildBottomNavigationBar(context, '/ds'),
+    );
+  }
+
+  // Customer Card Widget
+  Widget _buildCustomerCard(BuildContext context, Map<String, dynamic> customer) {
+    bool isOverdue = customer["status"] == "OD";
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PlaceOrderTwo(), // Replace with your screen
+          ),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        margin: const EdgeInsets.symmetric(vertical: 6),
+        decoration: BoxDecoration(
+          color: const Color(0xFF292B3E),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          children: [
+            // Customer Details
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    customer["name"],
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text("Code: ${customer["code"]}", style: TextStyle(color: Colors.grey[400], fontSize: 14)),
+                  Text("Address: ${customer["address"]}", style: TextStyle(color: Colors.grey[400], fontSize: 14)),
+                  Text("Phone: ${customer["phone"]}", style: TextStyle(color: Colors.grey[400], fontSize: 14)),
+                ],
+              ),
+            ),
+
+            // Status Badge
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: isOverdue ? Colors.red.withOpacity(0.1) : Colors.green.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Text(
+                customer["status"],
+                style: TextStyle(
+                  color: isOverdue ? Colors.red : Colors.green,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBottomNavigationBar(BuildContext context, String currentRoute) {
+    return Container(
+      color: const Color(0xFF282935),
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildBottomNavItem(
+            context,
+            Icons.home,
+            'Home',
+            '/dashboard', // Route for Home
+            currentRoute == '/', // Check if selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.business,
+            'Report',
+            '/reports', // Route for Report
+            currentRoute == '/', // Check if selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.person,
+            'Profile',
+            '/', // Route for Profile
+            currentRoute == '/', // Check if selected
+          ),
         ],
       ),
     );
   }
 
-  // Customer Card Widget
-  Widget _buildCustomerCard(Map<String, dynamic> customer) {
-    bool isOverdue = customer["status"] == "OD";
-
-    return Container(
-      padding: const EdgeInsets.all(12),
-      margin: const EdgeInsets.symmetric(vertical: 6),
-      decoration: BoxDecoration(
-        color: const Color(0xFF292B3E),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
+  Widget _buildBottomNavItem(BuildContext context, IconData icon, String label,
+      String route, bool isSelected) {
+    return GestureDetector(
+      onTap: () {
+        if(route=='/dashboard')
+          Navigator.pushNamedAndRemoveUntil(context, route, (route)=>false);
+        else if(route=='/reports'){
+          Navigator.pushReplacementNamed(context, route);
+        }
+        else
+          Navigator.pushNamed(context, route);
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          // Customer Details
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(customer["name"], style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500)),
-                const SizedBox(height: 4),
-                Text("Code: ${customer["code"]}", style: TextStyle(color: Colors.grey[400], fontSize: 14)),
-                Text("Address: ${customer["address"]}", style: TextStyle(color: Colors.grey[400], fontSize: 14)),
-                Text("Phone: ${customer["phone"]}", style: TextStyle(color: Colors.grey[400], fontSize: 14)),
-              ],
-            ),
+          Icon(
+            icon,
+            color: isSelected ? Colors.white : Colors.grey,
           ),
-
-          // Status Badge
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              color: isOverdue ? Colors.red.withOpacity(0.1) : Colors.green.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: Text(
-              customer["status"],
-              style: TextStyle(
-                color: isOverdue ? Colors.red : Colors.green,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.grey,
+              fontSize: 12,
             ),
           ),
         ],

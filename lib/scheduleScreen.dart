@@ -68,7 +68,7 @@ class _MySchedulePageState extends State<ScheduleScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      bottomNavigationBar: _buildBottomNavigationBar(context, '/tra'),
     );
   }
 
@@ -269,40 +269,72 @@ class _MySchedulePageState extends State<ScheduleScreen> {
     }
   }
 
-  Widget _buildBottomNavigationBar() {
+  Widget _buildBottomNavigationBar(BuildContext context, String currentRoute) {
     return Container(
       color: const Color(0xFF282935),
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildBottomNavItem(Icons.home, 'Home', false),
-          _buildBottomNavItem(Icons.business, 'Report', false),
-          _buildBottomNavItem(Icons.person, 'My Profile', false),
+          _buildBottomNavItem(
+            context,
+            Icons.home,
+            'Home',
+            '/dashboard', // Route for Home
+            currentRoute == '/', // Check if selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.business,
+            'Report',
+            '/reports', // Route for Report
+            currentRoute == '/', // Check if selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.person,
+            'Profile',
+            '/', // Route for Profile
+            currentRoute == '/', // Check if selected
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildBottomNavItem(IconData icon, String label, bool isSelected) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(
-          icon,
-          color: isSelected ? Colors.white : Colors.grey,
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(
+  Widget _buildBottomNavItem(BuildContext context, IconData icon, String label,
+      String route, bool isSelected) {
+    return GestureDetector(
+      onTap: () {
+        if(route=='/dashboard')
+          Navigator.pushNamedAndRemoveUntil(context, route, (route)=>false);
+        else if(route=='/reports'){
+          Navigator.pushReplacementNamed(context, route);
+        }
+        else
+          Navigator.pushNamed(context, route);
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
             color: isSelected ? Colors.white : Colors.grey,
-            fontSize: 12,
           ),
-        ),
-      ],
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.grey,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
     );
   }
+
+
 }
 
 enum ScheduleStatus {

@@ -240,7 +240,7 @@ class _DashboardPageState extends State<DashboardPage> {
           _buildBottomNavItem(
             context,
             Icons.person,
-            'My Profile',
+            'Profile',
             '/', // Example route for Profile screen
             false, // Not selected
           ),

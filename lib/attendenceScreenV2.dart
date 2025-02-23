@@ -117,44 +117,72 @@ class AttendanceReport extends StatelessWidget {
                 ],
               ),
             ),
-            const Spacer(),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical:10),
-              decoration: const BoxDecoration(
-                color: Color(0xFF292B3E),
-                // border: Border(
-                //   top: BorderSide(
-                //     color: Colors.grey,
-                //     width: 0.2,
-                //   ),
-                // ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _BottomNavItem(
-                    icon: Icons.home_outlined,
-                    label: 'Home',
-                    isSelected: false,
-                    onTap: () {},
-                  ),
-                  _BottomNavItem(
-                    icon: Icons.assessment_outlined,
-                    label: 'Report',
-                    isSelected: true,
-                    onTap: () {},
-                  ),
-                  _BottomNavItem(
-                    icon: Icons.person_outline,
-                    label: 'My Profile',
-                    isSelected: false,
-                    onTap: () {},
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
+      ),
+      bottomNavigationBar: _buildBottomNavigationBar(context, '/'),
+    );
+  }
+  Widget _buildBottomNavigationBar(BuildContext context, String currentRoute) {
+    return Container(
+      color: const Color(0xFF282935),
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildBottomNavItem(
+            context,
+            Icons.home,
+            'Home',
+            '/dashboard', // Route for Home
+            currentRoute == '/ds', // Check if selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.business,
+            'Report',
+            '/reports', // Route for Report
+            currentRoute == '/ds', // Check if selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.person,
+            'Profile',
+            '/', // Route for Profile
+            currentRoute == '/ds', // Check if selected
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomNavItem(BuildContext context, IconData icon, String label,
+      String route, bool isSelected) {
+    return GestureDetector(
+      onTap: () {
+        if(route=='/dashboard')
+          Navigator.pushNamedAndRemoveUntil(context, route, (route)=>false);
+        else if(route=='/reports')
+          Navigator.pop(context);
+        else
+          Navigator.pushNamed(context, route);
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            color: isSelected ? Colors.white : Colors.grey,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.grey,
+              fontSize: 12,
+            ),
+          ),
+        ],
       ),
     );
   }

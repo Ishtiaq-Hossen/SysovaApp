@@ -105,7 +105,7 @@ class _WeeklyTourPlanScreenState extends State<WeeklyTourPlanScreen> {
 
             // Tour Type Dropdown
             const Text("Tour Type", style: TextStyle(color: Colors.white, fontSize: 16)),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             _buildDropdown("Select your tour type", tourTypes, selectedTourType, (value) {
               setState(() => selectedTourType = value);
             }),
@@ -113,7 +113,7 @@ class _WeeklyTourPlanScreenState extends State<WeeklyTourPlanScreen> {
 
             // Work Type Dropdown
             const Text("Work Type", style: TextStyle(color: Colors.white, fontSize: 16)),
-            const SizedBox(height: 8),
+            const SizedBox(height: 5),
             _buildDropdown("Select your work type", workTypes, selectedWorkType, (value) {
               setState(() => selectedWorkType = value);
             }),
@@ -136,16 +136,7 @@ class _WeeklyTourPlanScreenState extends State<WeeklyTourPlanScreen> {
       ),
 
       // Bottom Navigation Bar
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFF292B3E),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.arrow_back), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: "Report"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "My Profile"),
-        ],
-      ),
+      bottomNavigationBar: _buildBottomNavigationBar(context, '/tr'),
     );
   }
 
@@ -153,6 +144,7 @@ class _WeeklyTourPlanScreenState extends State<WeeklyTourPlanScreen> {
   Widget _buildDropdown(String hint, List<String> items, String? selectedValue, ValueChanged<String?> onChanged) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12),
+      margin: EdgeInsets.symmetric(horizontal: 2),
       decoration: BoxDecoration(
         color: const Color(0xFF191A22),
         borderRadius: BorderRadius.circular(8),
@@ -173,6 +165,70 @@ class _WeeklyTourPlanScreenState extends State<WeeklyTourPlanScreen> {
             );
           }).toList(),
         ),
+      ),
+    );
+  }
+  Widget _buildBottomNavigationBar(BuildContext context, String currentRoute) {
+    return Container(
+      color: const Color(0xFF282935),
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildBottomNavItem(
+            context,
+            Icons.home,
+            'Home',
+            '/dashboard', // Route for Home
+            currentRoute == '/', // Check if selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.business,
+            'Report',
+            '/reports', // Route for Report
+            currentRoute == '/', // Check if selected
+          ),
+          _buildBottomNavItem(
+            context,
+            Icons.person,
+            'Profile',
+            '/', // Route for Profile
+            currentRoute == '/', // Check if selected
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomNavItem(BuildContext context, IconData icon, String label,
+      String route, bool isSelected) {
+    return GestureDetector(
+      onTap: () {
+        if(route=='/dashboard')
+          Navigator.pushNamedAndRemoveUntil(context, route, (route)=>false);
+        else if(route=='/reports'){
+          Navigator.pushReplacementNamed(context, route);
+        }
+        else
+          Navigator.pushNamed(context, route);
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            color: isSelected ? Colors.white : Colors.grey,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.grey,
+              fontSize: 12,
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -29,48 +29,73 @@ class OrderSummary extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Container(
-                    height: 50,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Customer Wise',
-                        style: TextStyle(
+                  child: GestureDetector(
+                    onTap: () {
+                      // Handle 'Customer Wise' button press
+                    },
+                    child: Container(
+                      height: 50,
+                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25),
+                        border: Border.all(color: Colors.black12), // Light border for depth
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Customer Wise',
+                          style: TextStyle(
                             color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 22),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(width: 12),
                 Expanded(
-                  child: Container(
-                    height: 50,
-                    margin: EdgeInsets.symmetric(vertical: 12),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF585858),
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Product Wise',
-                        style: TextStyle(
+                  child: GestureDetector(
+                    onTap: () {
+                      // Handle 'Product Wise' button press
+                    },
+                    child: Container(
+                      height: 50,
+                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF757575),
+                        borderRadius: BorderRadius.circular(25),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Product Wise',
+                          style: TextStyle(
                             color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 22),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ],
             ),
+
             const SizedBox(height: 20),
 
             // --------------------------Table Header--------------------------
@@ -196,7 +221,6 @@ class OrderSummary extends StatelessWidget {
                 amount: '15,000',
               ),
             ),
-
             const SizedBox(height: 2),
             // Gap with body color
 
@@ -265,48 +289,10 @@ class OrderSummary extends StatelessWidget {
               ),
             ),
 
-            const Spacer(),
-
-            // Bottom Navigation Bar
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              decoration: const BoxDecoration(
-                color: Color(0xFF292B3E),
-                border: Border(
-                  top: BorderSide(
-                    color: Colors.grey,
-                    width: 0.2,
-                  ),
-                ),
-              ),
-              // child: Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //   children: [
-              //     _BottomNavItem(
-              //       icon: Icons.home_outlined,
-              //       label: 'Home',
-              //       isSelected: false,
-              //       onTap: () {},
-              //     ),
-              //     _BottomNavItem(
-              //       icon: Icons.assessment_outlined,
-              //       label: 'Report',
-              //       isSelected: true,
-              //       onTap: () {},
-              //     ),
-              //     _BottomNavItem(
-              //       icon: Icons.person_outline,
-              //       label: 'My Profile',
-              //       isSelected: false,
-              //       onTap: () {},
-              //     ),
-              //   ],
-              // ),
-            ),
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(context, '/'),
+      bottomNavigationBar: _buildBottomNavigationBar(context, '/sa'),
     );
   }
   Widget _buildBottomNavigationBar(BuildContext context, String currentRoute) {
@@ -348,6 +334,8 @@ class OrderSummary extends StatelessWidget {
       onTap: () {
         if(route=='/dashboard')
           Navigator.pushNamedAndRemoveUntil(context, route, (route)=>false);
+        else if(route=='/reports')
+          Navigator.pop(context);
         else
           Navigator.pushNamed(context, route);
       },
