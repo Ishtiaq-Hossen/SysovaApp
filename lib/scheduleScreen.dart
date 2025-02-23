@@ -122,51 +122,91 @@ class _MySchedulePageState extends State<ScheduleScreen> {
 
   Widget _buildScheduleHeader() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12), // Reduced padding
-      color: const Color(0xFF673AB7),
-      child: const Row(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      decoration: BoxDecoration(
+        color: const Color(0xFF673AB7),
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      margin: const EdgeInsets.symmetric(horizontal: 12),
+      child: Row(
         children: [
           Expanded(
-            flex: 3, // Adjusted flex
-            child: Text(
-              'Tour Type',
-              style: TextStyle(color: Colors.white, fontSize: 13), // Reduced font size
+            flex: 3,
+            child: Center(
+              child: Text(
+                'Tour Type',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
-          SizedBox(width: 4), // Added small spacing
-          Text('|', style: TextStyle(color: Colors.white)),
-          SizedBox(width: 4),
+          _buildDivider(),
           Expanded(
-            flex: 3, // Adjusted flex
-            child: Text(
-              'Work Type',
-              style: TextStyle(color: Colors.white, fontSize: 13),
+            flex: 3,
+            child: Center(
+              child: Text(
+                'Work Type',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
-          SizedBox(width: 4),
-          Text('|', style: TextStyle(color: Colors.white)),
-          SizedBox(width: 4),
+          _buildDivider(),
           Expanded(
-            flex: 3, // Adjusted flex
-            child: Text(
-              'Date',
-              style: TextStyle(color: Colors.white, fontSize: 13),
+            flex: 3,
+            child: Center(
+              child: Text(
+                'Date',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
-          SizedBox(width: 4),
-          Text('|', style: TextStyle(color: Colors.white)),
-          SizedBox(width: 4),
+          _buildDivider(),
           Expanded(
-            flex: 4, // Increased flex for status column
-            child: Text(
-              'Status',
-              style: TextStyle(color: Colors.white, fontSize: 13),
+            flex: 4,
+            child: Center(
+              child: Text(
+                'Status',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
         ],
       ),
     );
   }
+
+  Widget _buildDivider() {
+    return Container(
+      height: 20,
+      width: 1.5,
+      color: Colors.white.withOpacity(0.6),
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+    );
+  }
+
 
   Widget _buildScheduleItem(ScheduleItem item) {
     return Container(

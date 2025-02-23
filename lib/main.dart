@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Import this for orientation control
 import 'package:hella/attendenceScreen.dart';
 import 'package:hella/dashboardScreen.dart';
 import 'package:hella/orderScreen.dart';
@@ -13,7 +14,15 @@ import 'attendenceScreenV2.dart';
 import 'orderSummery.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Lock orientation to portrait mode
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
