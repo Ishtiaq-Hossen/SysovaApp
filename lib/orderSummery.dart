@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 
-class OrderSummary extends StatelessWidget {
+import 'globalColors.dart';
+
+class OrderSummary extends StatefulWidget {
   const OrderSummary({Key? key}) : super(key: key);
 
   @override
+  State<OrderSummary> createState() => _OrderSummaryState();
+}
+
+class _OrderSummaryState extends State<OrderSummary> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF191A22),
+      // backgroundColor: const Color(0xFF191A22),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: const Color(0xFF191A22),
-        leading: const BackButton(color: Colors.white),
-        title: const Text(
+        backgroundColor: ScaffholdColor,
+        leading: BackButton(color: iconColorLight),
+        title: Text(
           'Order Summary',
           style: TextStyle(
-            color: Colors.white,
+            color: textColorLight,
             fontSize: 18,
             fontWeight: FontWeight.w500,
           ),
@@ -22,7 +29,7 @@ class OrderSummary extends StatelessWidget {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(2.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             // Toggle Buttons
@@ -37,8 +44,8 @@ class OrderSummary extends StatelessWidget {
                       height: 50,
                       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(25),
+                        color: buttonGreeen,
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: Colors.black12), // Light border for depth
                         boxShadow: [
                           BoxShadow(
@@ -48,11 +55,11 @@ class OrderSummary extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
                           'Customer Wise',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: textColorLight,
                             fontWeight: FontWeight.w600,
                             fontSize: 18,
                           ),
@@ -70,21 +77,21 @@ class OrderSummary extends StatelessWidget {
                       height: 50,
                       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                       decoration: BoxDecoration(
-                        color: Color(0xFF757575),
-                        borderRadius: BorderRadius.circular(25),
+                        color: boxColorGrey,
+                        borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black26,
+                            color: iconColorDark,
                             blurRadius: 4,
                             offset: Offset(0, 2),
                           ),
                         ],
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
                           'Product Wise',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: textColorLight,
                             fontWeight: FontWeight.w600,
                             fontSize: 18,
                           ),
@@ -102,9 +109,9 @@ class OrderSummary extends StatelessWidget {
             Container(
               margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
               height: 40,
-              decoration: const BoxDecoration(
-                color: Color(0xFF4E409E),
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: tableHead,
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8),
                     bottomLeft: Radius.circular(8),
@@ -114,59 +121,59 @@ class OrderSummary extends StatelessWidget {
                 child: Row(
                   children: [
                     const SizedBox(width: 16),
-                    const Expanded(
+                    Expanded(
                       flex: 1,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         child: Text(
                           'SN',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: textColorLight,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                     ),
                     _VerticalDivider(),
-                    const Expanded(
+                    Expanded(
                       flex: 3,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         child: Text(
                           'Name',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: textColorLight,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                     ),
                     _VerticalDivider(),
-                    const Expanded(
+                    Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         child: Text(
                           'Carton',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: textColorLight,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                     ),
                     _VerticalDivider(),
-                    const Expanded(
+                    Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         child: Text(
                           'Amount',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: textColorLight,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -182,11 +189,10 @@ class OrderSummary extends StatelessWidget {
             // Gap with body color
 
             // -------------------------------Table Rows------------------------------------
-
             Container(
               margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
               decoration: BoxDecoration(
-                color: Color(0xFF292B3E),
+                color: tableRow,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8),
@@ -200,14 +206,12 @@ class OrderSummary extends StatelessWidget {
                 amount: '30,000',
               ),
             ),
-
             const SizedBox(height: 2),
             // Gap with body color
-
             Container(
               margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
               decoration: BoxDecoration(
-                color: Color(0xFF292B3E),
+                color: tableRow,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8),
@@ -227,9 +231,9 @@ class OrderSummary extends StatelessWidget {
             // Total Row
             Container(
               margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-              decoration: const BoxDecoration(
-                color: Color(0xFF1E7597),
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: tableTotalRow,
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8),
                     bottomLeft: Radius.circular(8),
@@ -239,45 +243,45 @@ class OrderSummary extends StatelessWidget {
                 child: Row(
                   children: [
                     const SizedBox(width: 16),
-                    const Expanded(
+                    Expanded(
                       flex: 4,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         child: Text(
                           'Total',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: textColorLight,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                     ),
                     _VerticalDividerV2(),
-                    const Expanded(
+                    Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         child: Text(
                           '30',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: textColorLight,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                     ),
                     _VerticalDividerV2(),
-                    const Expanded(
+                    Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         child: Text(
                           '45,000',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: textColorLight,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -292,70 +296,122 @@ class OrderSummary extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(context, '/sa'),
+      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
-  Widget _buildBottomNavigationBar(BuildContext context, String currentRoute) {
+
+  Widget _buildBottomNavigationBar() {
     return Container(
-      color: const Color(0xFF282935),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: borderColor, // Border color
+            width: 5, // Border width
+          ),
+          // You can omit the other sides if you want no borders on them
+          left: BorderSide.none,
+          right: BorderSide.none,
+          bottom: BorderSide.none,
+        ),
+        // color: const Color(0xFFE3CECE),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      // color: const Color(0xFFE3CECE),
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildBottomNavItem(
             context,
-            Icons.home,
+            'assets/images/icons/home.png', // Path to the image asset
             'Home',
-            '/dashboard', // Route for Home
-            currentRoute == '/', // Check if selected
+            '/dashboard', // Example route for Home screen
+            true, // Is selected
           ),
           _buildBottomNavItem(
             context,
-            Icons.business,
+            'assets/images/icons/report.png', // Path to the image asset
             'Report',
-            '/reports', // Route for Report
-            currentRoute == '/', // Check if selected
+            '/reports', // Example route for Report screen
+            false, // Not selected
           ),
           _buildBottomNavItem(
             context,
-            Icons.person,
+            'assets/images/icons/profile.png', // Pth to the image asset
             'Profile',
-            '/', // Route for Profile
-            currentRoute == '/', // Check if selected
+            '/', // Example route for Profile screen
+            false, // Not selected
           ),
         ],
       ),
     );
   }
 
-  Widget _buildBottomNavItem(BuildContext context, IconData icon, String label,
-      String route, bool isSelected) {
+  Widget _buildBottomNavItem(BuildContext context, String imagePath,
+      String label, String route, bool isSelected) {
     return GestureDetector(
       onTap: () {
-        if(route=='/dashboard')
-          Navigator.pushNamedAndRemoveUntil(context, route, (route)=>false);
-        else if(route=='/reports')
+        // For other routes, use Navigator.pushNamed
+        if (route == '/dashboard')
+          Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
+        else if (route == '/reports') {
           Navigator.pop(context);
-        else
-          Navigator.pushNamed(context, route);
+        } else
+          _showMyDialog();
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            icon,
-            color: isSelected ? Colors.white : Colors.grey,
+          Image.asset(
+            imagePath,
+            // color: isSelected ? Colors.white : Colors.grey, // Change image color for selection
+            width: 35, // Set width for image
+            height: 35, // Set height for image
           ),
           const SizedBox(height: 4),
           Text(
             label,
             style: TextStyle(
-              color: isSelected ? Colors.white : Colors.grey,
-              fontSize: 12,
+              // color: isSelected ? Colors.white : Colors.grey,
+              color: textColorDark,
+              fontSize: 14,
+              fontWeight: FontWeight.bold
             ),
           ),
         ],
       ),
+    );
+  }
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          // icon: Icon(Icons.add_alert, size: 60,),
+          // iconColor: Color(0xFFea5a5a),
+          title: const Text(
+            '🚨 Missing Requirements!',
+            style: TextStyle(fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('⚠️  It looks like you\'ve provided a design without specifying any requirements. To ensure we build exactly what you need, please share details like functionality, features, and any specific preferences.'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Okay Understand'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -369,7 +425,7 @@ class _VerticalDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 3,
-      color: Colors.orange,
+      color: dividerOrangeColor,
       margin: const EdgeInsets.symmetric(vertical: 8),
     );
   }
@@ -384,7 +440,7 @@ class _VerticalDividerV2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 3,
-      color: Colors.white,
+      color: iconColorLight,
       margin: const EdgeInsets.symmetric(vertical: 8),
     );
   }
@@ -416,8 +472,9 @@ class _TableRow extends StatelessWidget {
               child: Text(
                 sn,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: textColorDark,
+                  fontWeight: FontWeight.bold
                 ),
               ),
             ),
@@ -430,8 +487,9 @@ class _TableRow extends StatelessWidget {
               child: Text(
                 name,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: textColorDark,
+                  fontWeight: FontWeight.bold
                 ),
               ),
             ),
@@ -444,8 +502,9 @@ class _TableRow extends StatelessWidget {
               child: Text(
                 carton,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: textColorDark,
+                  fontWeight: FontWeight.bold
                 ),
               ),
             ),
@@ -458,51 +517,14 @@ class _TableRow extends StatelessWidget {
               child: Text(
                 amount,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: textColorDark,
+                  fontWeight: FontWeight.bold
                 ),
               ),
             ),
           ),
           const SizedBox(width: 16),
-        ],
-      ),
-    );
-  }
-}
-
-class _BottomNavItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  const _BottomNavItem({
-    required this.icon,
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            color: isSelected ? Colors.white : Colors.grey,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              color: isSelected ? Colors.white : Colors.grey,
-              fontSize: 12,
-            ),
-          ),
         ],
       ),
     );

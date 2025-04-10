@@ -320,25 +320,6 @@
                     }
                 },
                 {
-                    "source": "/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/res/values/styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "173,818",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "476,982"
-                    },
-                    "to": {
-                        "startLines": "183,187",
-                        "startColumns": "4,4",
-                        "startOffsets": "11054,11235",
-                        "endLines": "186,189",
-                        "endColumns": "12,12",
-                        "endOffsets": "11230,11399"
-                    }
-                },
-                {
                     "source": "/home/app-sysnova1/.gradle/caches/transforms-3/ca4d40f38b71d4c621d36eba6fe2f4a4/transformed/fragment-1.7.1/res/values/values.xml",
                     "from": {
                         "startLines": "2,3,4,5,10",
@@ -516,6 +497,25 @@
                         "startOffsets": "7647",
                         "endColumns": "42",
                         "endOffsets": "7685"
+                    }
+                },
+                {
+                    "source": "/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "173,818",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "476,982"
+                    },
+                    "to": {
+                        "startLines": "183,187",
+                        "startColumns": "4,4",
+                        "startOffsets": "11054,11235",
+                        "endLines": "186,189",
+                        "endColumns": "12,12",
+                        "endOffsets": "11230,11399"
                     }
                 }
             ]
@@ -3511,7 +3511,7 @@
             "outputFile": "com.example.hella.app-merged_res-30:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
-                    "source": "/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

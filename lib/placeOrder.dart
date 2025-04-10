@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hella/placeOrderScreenTwo.dart';
 
+import 'globalColors.dart';
+
 void main() {
   runApp(const MaterialApp(home: PlaceOrderScreen()));
 }
@@ -17,9 +19,9 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
   final List<Map<String, dynamic>> customers = [
     {"name": "M/S Vai Vai Treders", "code": "123456", "address": "Dhaka", "phone": "01732222222", "status": "OD"},
     {"name": "M/S Vai Vai Treders", "code": "123456", "address": "Dhaka", "phone": "01732222222", "status": "NOD"},
+    {"name": "Shamol Dada Treders", "code": "123456", "address": "Dhaka", "phone": "01732222222", "status": "NOD"},
     {"name": "M/S Vai Vai Treders", "code": "123456", "address": "Dhaka", "phone": "01732222222", "status": "NOD"},
-    {"name": "M/S Vai Vai Treders", "code": "123456", "address": "Dhaka", "phone": "01732222222", "status": "NOD"},
-    {"name": "M/S Vai Vai Treders", "code": "123456", "address": "Dhaka", "phone": "01732222222", "status": "OD"},
+    {"name": "Sultan Vai Vai Treders", "code": "123456", "address": "Dhaka", "phone": "01732222222", "status": "OD"},
   ];
 
   List<Map<String, dynamic>> filteredCustomers = [];
@@ -40,83 +42,85 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF191A22), // Dark theme background
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF191A22),
-        title: const Text("Place Order"),
-        centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.white),
-        titleTextStyle: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
+    return SafeArea(
+      child: Scaffold(
+        // backgroundColor: const Color(0xFF191A22), // Dark theme background
+        appBar: AppBar(
+          toolbarHeight: 70.0,
+          backgroundColor: ScaffholdColor,
+          title: const Text("Place Order"),
+          centerTitle: true,
+          iconTheme: IconThemeData(color: iconColorLight),
+          titleTextStyle: TextStyle(color: textColorLight, fontSize: 18, fontWeight: FontWeight.w500),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pop(context),
+          ),
         ),
-        actions: const [Icon(Icons.more_vert)],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Select Customer", style: TextStyle(color: Colors.white, fontSize: 16)),
-
-            const SizedBox(height: 8),
-
-            // Search Bar
-            TextField(
-              controller: _searchController,
-              onChanged: _filterCustomers,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-
-                hintText: "Search Customer",
-                hintStyle: const TextStyle(color: Colors.grey),
-                filled: true,
-                fillColor: const Color(0xFF292B3E),
-                prefixIcon: const Icon(Icons.search, color: Colors.white),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(
-                    color: Colors.white, // White border color
-                    width: 1, // Border width
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Select Customer", style: TextStyle(color: textColorDark, fontSize: 16)),
+      
+              const SizedBox(height: 8),
+      
+              // Search Bar
+              TextField(
+                controller: _searchController,
+                onChanged: _filterCustomers,
+                style: TextStyle(color: textColorDark),
+                decoration: InputDecoration(
+      
+                  hintText: "Search Customer",
+                  hintStyle: TextStyle(color: boxColorGrey),
+                  filled: true,
+                  fillColor: cardColorLight,
+                  prefixIcon: Icon(Icons.search, color:iconColorDark),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: iconColorLight, // White border color
+                      width: 1, // Border width
+                    ),
+      
                   ),
-
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(
-                    color: Colors.white, // White border color
-                    width: 1, // Border width
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: iconColorLight, // White border color
+                      width: 1, // Border width
+                    ),
                   ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(
-                    color: Colors.white, // White border color
-                    width: 1, // Border width
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color:iconColorLight, // White border color
+                      width: 1, // Border width
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
-
-            // Customer List
-            Expanded(
-              child: ListView.builder(
-                itemCount: filteredCustomers.length,
-                itemBuilder: (context, index) {
-                  final customer = filteredCustomers[index];
-                  return _buildCustomerCard(context, customer);
-                },
+              const SizedBox(height: 16),
+      
+              // Customer List
+              Expanded(
+                child: ListView.builder(
+                  itemCount: filteredCustomers.length,
+                  itemBuilder: (context, index) {
+                    final customer = filteredCustomers[index];
+                    return _buildCustomerCard(context, customer);
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+      
+        // Bottom Navigation Bar
+        bottomNavigationBar: _buildBottomNavigationBar(),
       ),
-
-      // Bottom Navigation Bar
-      bottomNavigationBar: _buildBottomNavigationBar(context, '/ds'),
     );
   }
 
@@ -137,7 +141,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
         padding: const EdgeInsets.all(12),
         margin: const EdgeInsets.symmetric(vertical: 6),
         decoration: BoxDecoration(
-          color: const Color(0xFF292B3E),
+          color: cardColordark,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -149,16 +153,16 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                 children: [
                   Text(
                     customer["name"],
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: buttonBlue,
                       fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
-                  Text("Code: ${customer["code"]}", style: TextStyle(color: Colors.grey[400], fontSize: 14)),
-                  Text("Address: ${customer["address"]}", style: TextStyle(color: Colors.grey[400], fontSize: 14)),
-                  Text("Phone: ${customer["phone"]}", style: TextStyle(color: Colors.grey[400], fontSize: 14)),
+                  Text("Code: ${customer["code"]}", style: TextStyle(color: textColorDark, fontSize: 14,fontWeight: FontWeight.bold)),
+                  Text("Address: ${customer["address"]}", style: TextStyle(color: textColorDark, fontSize: 14,fontWeight: FontWeight.bold)),
+                  Text("Phone: ${customer["phone"]}", style: TextStyle(color: textColorDark, fontSize: 14,fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
@@ -185,68 +189,118 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
     );
   }
 
-  Widget _buildBottomNavigationBar(BuildContext context, String currentRoute) {
+  Widget _buildBottomNavigationBar() {
     return Container(
-      color: const Color(0xFF282935),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: borderColor, // Border color
+            width: 5, // Border width
+          ),
+          // You can omit the other sides if you want no borders on them
+          left: BorderSide.none,
+          right: BorderSide.none,
+          bottom: BorderSide.none,
+        ),
+        // color: const Color(0xFFE3CECE),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      // color: const Color(0xFFE3CECE),
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildBottomNavItem(
             context,
-            Icons.home,
+            'assets/images/icons/home.png', // Path to the image asset
             'Home',
-            '/dashboard', // Route for Home
-            currentRoute == '/', // Check if selected
+            '/dashboard', // Example route for Home screen
+            true, // Is selected
           ),
           _buildBottomNavItem(
             context,
-            Icons.business,
+            'assets/images/icons/report.png', // Path to the image asset
             'Report',
-            '/reports', // Route for Report
-            currentRoute == '/', // Check if selected
+            '/reports', // Example route for Report screen
+            false, // Not selected
           ),
           _buildBottomNavItem(
             context,
-            Icons.person,
+            'assets/images/icons/profile.png', // Pth to the image asset
             'Profile',
-            '/', // Route for Profile
-            currentRoute == '/', // Check if selected
+            '/', // Example route for Profile screen
+            false, // Not selected
           ),
         ],
       ),
     );
   }
 
-  Widget _buildBottomNavItem(BuildContext context, IconData icon, String label,
-      String route, bool isSelected) {
+  Widget _buildBottomNavItem(BuildContext context, String imagePath,
+      String label, String route, bool isSelected) {
     return GestureDetector(
       onTap: () {
-        if(route=='/dashboard')
-          Navigator.pushNamedAndRemoveUntil(context, route, (route)=>false);
-        else if(route=='/reports'){
+        // For other routes, use Navigator.pushNamed
+        if (route == '/dashboard')
+          Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
+        else if (route == '/reports') {
           Navigator.pushReplacementNamed(context, route);
-        }
-        else
-          Navigator.pushNamed(context, route);
+        } else
+          _showMyDialog();
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            icon,
-            color: isSelected ? Colors.white : Colors.grey,
+          Image.asset(
+            imagePath,
+            // color: isSelected ? Colors.white : Colors.grey, // Change image color for selection
+            width: 35, // Set width for image
+            height: 35, // Set height for image
           ),
           const SizedBox(height: 4),
           Text(
             label,
             style: TextStyle(
-              color: isSelected ? Colors.white : Colors.grey,
-              fontSize: 12,
+              // color: isSelected ? Colors.white : Colors.grey,
+                color: textColorDark,
+                fontSize: 14,
+                fontWeight: FontWeight.bold
             ),
           ),
         ],
       ),
+    );
+  }
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          // icon: Icon(Icons.add_alert, size: 60,),
+          // iconColor: Color(0xFFea5a5a),
+          title: const Text(
+            '🚨 Missing Requirements!',
+            style: TextStyle(fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('⚠️  It looks like you\'ve provided a design without specifying any requirements. To ensure we build exactly what you need, please share details like functionality, features, and any specific preferences.'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Okay Understand'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

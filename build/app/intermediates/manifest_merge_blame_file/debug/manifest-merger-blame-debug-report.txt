@@ -13,17 +13,17 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/AndroidManifest.xml:2:5-66
-15-->/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/AndroidManifest.xml:2:22-64
+15-->/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/AndroidManifest.xml:2:5-66
+15-->/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/AndroidManifest.xml:2:22-64
 16    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-16-->/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/AndroidManifest.xml:3:5-78
-16-->/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/AndroidManifest.xml:3:22-76
+16-->/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/AndroidManifest.xml:3:5-78
+16-->/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/AndroidManifest.xml:3:22-76
 17    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-17-->/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/AndroidManifest.xml:4:5-80
-17-->/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/AndroidManifest.xml:4:22-78
+17-->/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/AndroidManifest.xml:4:5-80
+17-->/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/AndroidManifest.xml:4:22-78
 18    <uses-permission android:name="android.permission.CAMERA" />
-18-->/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/AndroidManifest.xml:5:5-65
-18-->/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/AndroidManifest.xml:5:22-62
+18-->/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/AndroidManifest.xml:5:5-65
+18-->/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/AndroidManifest.xml:5:22-62
 19    <!--
 20 Required to query activities that can process text, see:
 21         https://developer.android.com/training/package-visibility and
@@ -32,16 +32,16 @@
 24         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
 25    -->
 26    <queries>
-26-->/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/AndroidManifest.xml:46:5-51:15
+26-->/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/AndroidManifest.xml:46:5-51:15
 27        <intent>
-27-->/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/AndroidManifest.xml:47:9-50:18
+27-->/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/AndroidManifest.xml:47:9-50:18
 28            <action android:name="android.intent.action.PROCESS_TEXT" />
-28-->/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/AndroidManifest.xml:48:13-72
-28-->/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/AndroidManifest.xml:48:21-70
+28-->/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/AndroidManifest.xml:48:13-72
+28-->/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/AndroidManifest.xml:48:21-70
 29
 30            <data android:mimeType="text/plain" />
-30-->/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/AndroidManifest.xml:49:13-50
-30-->/home/app-sysnova1/Desktop/StudioProject/hella/android/app/src/main/AndroidManifest.xml:49:19-48
+30-->/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/AndroidManifest.xml:49:13-50
+30-->/home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/android/app/src/main/AndroidManifest.xml:49:19-48
 31        </intent>
 32        <!-- Needs to be explicitly declared on Android R+ -->
 33        <package android:name="com.google.android.apps.maps" />
@@ -77,7 +77,7 @@
 50        android:debuggable="true"
 51        android:extractNativeLibs="true"
 52        android:icon="@mipmap/ic_launcher"
-53        android:label="hella" >
+53        android:label="SPL_White" >
 54        <activity
 55            android:name="com.example.hella.MainActivity"
 56            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -116,43 +116,43 @@
 89            android:value="AIzaSyAZfI3YEzKjGMEbg6HhlinS8BudcAtzw5A" />
 90
 91        <provider
-91-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:9-17:20
+91-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:9-17:20
 92            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-92-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-82
+92-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-82
 93            android:authorities="com.example.hella.flutter.image_provider"
-93-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-74
+93-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-74
 94            android:exported="false"
-94-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-37
+94-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-37
 95            android:grantUriPermissions="true" >
-95-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-47
+95-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-47
 96            <meta-data
-96-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-16:75
+96-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-16:75
 97                android:name="android.support.FILE_PROVIDER_PATHS"
-97-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:17-67
+97-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:17-67
 98                android:resource="@xml/flutter_image_picker_file_paths" />
-98-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-72
+98-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-72
 99        </provider> <!-- Trigger Google Play services to install the backported photo picker module. -->
 100        <service
-100-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:19:9-31:19
+100-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:19:9-31:19
 101            android:name="com.google.android.gms.metadata.ModuleDependencies"
-101-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-78
+101-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-78
 102            android:enabled="false"
-102-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-36
+102-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-36
 103            android:exported="false" >
-103-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:22:13-37
+103-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:22:13-37
 104            <intent-filter>
-104-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-26:29
+104-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-26:29
 105                <action android:name="com.google.android.gms.metadata.MODULE_DEPENDENCIES" />
-105-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:25:17-94
-105-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:25:25-91
+105-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:25:17-94
+105-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:25:25-91
 106            </intent-filter>
 107
 108            <meta-data
-108-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-30:36
+108-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-30:36
 109                android:name="photopicker_activity:0:required"
-109-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:29:17-63
+109-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:29:17-63
 110                android:value="" />
-110-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/hella/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:30:17-33
+110-->[:image_picker_android] /home/app-sysnova1/Desktop/StudioProject/whiteVersionV2/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:30:17-33
 111        </service> <!-- Needs to be explicitly declared on P+ -->
 112        <uses-library
 112-->[com.google.android.gms:play-services-maps:18.2.0] /home/app-sysnova1/.gradle/caches/transforms-3/f4d369bb198debe8c89a7b9800366cf3/transformed/jetified-play-services-maps-18.2.0/AndroidManifest.xml:39:9-41:40

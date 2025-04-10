@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'globalColors.dart';
+
 class TourPlanScreen extends StatefulWidget {
   const TourPlanScreen({Key? key}) : super(key: key);
 
@@ -53,21 +55,21 @@ class _WeeklyTourPlanPageState extends State<TourPlanScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1A1B25),
         elevation: 0,
-        title: const Text(
+        title: Text(
           'Weekly Tour Plan',
           style: TextStyle(
-            color: Colors.white,
+            color: textColorLight,
             fontSize: 18,
             fontWeight: FontWeight.w500,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: iconColorLight),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.more_vert, color: Colors.white),
+            icon: Icon(Icons.more_vert, color: iconColorLight),
             onPressed: () {},
           ),
         ],
@@ -123,13 +125,13 @@ class _WeeklyTourPlanPageState extends State<TourPlanScreen> {
         Container(
           width: 3,
           height: 16,
-          color: Colors.red,
+          color: borderColor,
           margin: const EdgeInsets.only(right: 8),
         ),
         Text(
           title,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: textColorLight,
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
@@ -144,23 +146,23 @@ class _WeeklyTourPlanPageState extends State<TourPlanScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: const Color(0xFF282935),
+          color: dropDownColor,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.calendar_today, color: Colors.white, size: 20),
+            Icon(Icons.calendar_today, color: iconColorLight, size: 20),
             const SizedBox(width: 8),
             Text(
               _getDayName(),
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: textColorLight,
                 fontSize: 16,
               ),
             ),
             const SizedBox(width: 8),
-            const Icon(Icons.arrow_drop_down, color: Colors.white),
+            Icon(Icons.arrow_drop_down, color: textColorLight),
           ],
         ),
       ),
@@ -170,8 +172,8 @@ class _WeeklyTourPlanPageState extends State<TourPlanScreen> {
   Widget _buildLabel(String text) {
     return Text(
       text,
-      style: const TextStyle(
-        color: Colors.white,
+      style: TextStyle(
+        color: textColorLight,
         fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
@@ -186,7 +188,7 @@ class _WeeklyTourPlanPageState extends State<TourPlanScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: const Color(0xFF282935),
+        color: dropDownColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: DropdownButtonHideUnderline(
@@ -194,12 +196,12 @@ class _WeeklyTourPlanPageState extends State<TourPlanScreen> {
           value: value,
           hint: Text(
             hint,
-            style: const TextStyle(color: Colors.grey),
+            style: TextStyle(color:boxColorGrey),
           ),
           isExpanded: true,
-          dropdownColor: const Color(0xFF282935),
-          icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
-          style: const TextStyle(color: Colors.white),
+          dropdownColor: dropDownColor,
+          icon: Icon(Icons.arrow_drop_down, color: iconColorLight),
+          style: TextStyle(color: textColorLight),
           onChanged: onChanged,
           items: ['Option 1', 'Option 2', 'Option 3']
               .map((String value) {
@@ -222,16 +224,16 @@ class _WeeklyTourPlanPageState extends State<TourPlanScreen> {
           // Handle submit action
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF282935),
+          backgroundColor: dropDownColor,
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
         ),
-        child: const Text(
+        child: Text(
           'Submit',
           style: TextStyle(
-            color: Colors.white,
+            color: textColorLight,
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
@@ -242,7 +244,7 @@ class _WeeklyTourPlanPageState extends State<TourPlanScreen> {
 
   Widget _buildBottomNavigationBar() {
     return Container(
-      color: const Color(0xFF282935),
+      color: dropDownColor,
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

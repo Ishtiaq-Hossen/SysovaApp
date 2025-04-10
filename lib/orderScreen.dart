@@ -1,105 +1,167 @@
 import 'package:flutter/material.dart';
 
-class OrdersScreen extends StatelessWidget {
+import 'globalColors.dart';
+
+class OrdersScreen extends StatefulWidget {
   const OrdersScreen({Key? key}) : super(key: key);
 
   @override
+  State<OrdersScreen> createState() => _OrdersScreenState();
+}
+
+class _OrdersScreenState extends State<OrdersScreen> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF191A22),
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: const Color(0xFF191A22),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+    return SafeArea(
+      child: Scaffold(
+        // backgroundColor: const Color(0xFF191A22),
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: ScaffholdColor,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: iconColorLight),
+            onPressed: () => Navigator.pop(context),
+          ),
+          title: Text(
+            'Orders',
+            style: TextStyle(color: textColorLight,fontSize: 18,
+              fontWeight: FontWeight.w500,),
+          ),
         ),
-        title: const Text(
-          'Orders',
-          style: TextStyle(color: Colors.white),
+        body: ListView(
+          padding: const EdgeInsets.all(16),
+          children: const [
+            OrderCard(
+              status: 'Pending',
+            ),
+            SizedBox(height: 16),
+            OrderCard(
+              status: 'Approved',
+            ),
+            SizedBox(height: 16),
+            OrderCard(
+              status: 'Completed',
+            ),
+          ],
         ),
+        bottomNavigationBar: _buildBottomNavigationBar(),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: const [
-          OrderCard(
-            status: 'Pending',
-          ),
-          SizedBox(height: 16),
-          OrderCard(
-            status: 'Approved',
-          ),
-          SizedBox(height: 16),
-          OrderCard(
-            status: 'Completed',
-          ),
-        ],
-      ),
-      bottomNavigationBar: _buildBottomNavigationBar(context, '/orders'),
     );
   }
 
-  Widget _buildBottomNavigationBar(BuildContext context, String currentRoute) {
+  Widget _buildBottomNavigationBar() {
     return Container(
-      color: const Color(0xFF282935),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: borderColor, // Border color
+            width: 5, // Border width
+          ),
+          // You can omit the other sides if you want no borders on them
+          left: BorderSide.none,
+          right: BorderSide.none,
+          bottom: BorderSide.none,
+        ),
+        // color: const Color(0xFFE3CECE),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      // color: const Color(0xFFE3CECE),
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildBottomNavItem(
             context,
-            Icons.home,
+            'assets/images/icons/home.png', // Path to the image asset
             'Home',
-            '/dashboard', // Route for Home
-            currentRoute == '/', // Check if selected
+            '/dashboard', // Example route for Home screen
+            true, // Is selected
           ),
           _buildBottomNavItem(
             context,
-            Icons.business,
+            'assets/images/icons/report.png', // Path to the image asset
             'Report',
-            '/reports', // Route for Report
-            currentRoute == '/', // Check if selected
+            '/reports', // Example route for Report screen
+            false, // Not selected
           ),
           _buildBottomNavItem(
             context,
-            Icons.person,
+            'assets/images/icons/profile.png', // Pth to the image asset
             'Profile',
-            '/', // Route for Profile
-            currentRoute == '/', // Check if selected
+            '/', // Example route for Profile screen
+            false, // Not selected
           ),
         ],
       ),
     );
   }
 
-  Widget _buildBottomNavItem(BuildContext context, IconData icon, String label,
-      String route, bool isSelected) {
+  //Its a custom widget for bottom navigation bar
+  Widget _buildBottomNavItem(BuildContext context, String imagePath,
+      String label, String route, bool isSelected) {
     return GestureDetector(
       onTap: () {
-        if(route=='/dashboard')
-        Navigator.pushNamedAndRemoveUntil(context, route, (route)=>false);
-        else if(route=='/reports')
+        // For other routes, use Navigator.pushNamed
+        if (route == '/dashboard')
+          Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
+        else if (route == '/reports') {
           Navigator.pushReplacementNamed(context, route);
-        else
-          Navigator.pushNamed(context, route);
+        } else
+          _showMyDialog();
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            icon,
-            color: isSelected ? Colors.white : Colors.grey,
+          Image.asset(
+            imagePath,
+            // color: isSelected ? Colors.white : Colors.grey, // Change image color for selection
+            width: 35, // Set width for image
+            height: 35, // Set height for image
           ),
           const SizedBox(height: 4),
           Text(
             label,
             style: TextStyle(
-              color: isSelected ? Colors.white : Colors.grey,
-              fontSize: 12,
+              //color: isSelected ? Colors.white : Colors.grey,
+                color: textColorDark,
+                fontSize: 14,
+                fontWeight: FontWeight.bold
             ),
           ),
         ],
       ),
+    );
+  }
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          // icon: Icon(Icons.add_alert, size: 60,),
+          // iconColor: Color(0xFFea5a5a),
+          title: const Text(
+            '🚨 Missing Requirements!',
+            style: TextStyle(fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('⚠️  It looks like you\'ve provided a design without specifying any requirements. To ensure we build exactly what you need, please share details like functionality, features, and any specific preferences.'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Okay Understand'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -129,10 +191,10 @@ class _OrderCardState extends State<OrderCard> {
   void _updateDisplayTextAndColor() {
     if (widget.status == 'Pending') {
       displayText = 'OD';
-      displayColor = Colors.red;
+      displayColor = ScaffholdColor;
     } else if (widget.status == 'Completed' || widget.status == 'Approved') {
       displayText = 'NOD';
-      displayColor = Colors.green;
+      displayColor = buttonGreeen;
     } else {
       displayText = '';
       displayColor = Colors.transparent;
@@ -148,8 +210,14 @@ class _OrderCardState extends State<OrderCard> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: const Color(0xFF292B3E),
+          color: cardColorLight,
           borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                color: iconColorDark,
+                blurRadius: 5.0,
+              ),
+            ]
         ),
         child: IntrinsicHeight(
           child: Row(
@@ -162,17 +230,20 @@ class _OrderCardState extends State<OrderCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Expanded(
+                        Expanded(
                           child: Text(
                             'M/S Vai Vai Treders',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: textColorDark,
                               fontSize: 15,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
+
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 8,
@@ -187,6 +258,7 @@ class _OrderCardState extends State<OrderCard> {
                             style: TextStyle(
                               color: displayColor,
                               fontSize: 12,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -196,24 +268,27 @@ class _OrderCardState extends State<OrderCard> {
                     Text(
                       'Code: 123456',
                       style: TextStyle(
-                        color: Colors.grey[400],
+                        color: textColorDark,
                         fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'Address: Dhaka',
                       style: TextStyle(
-                        color: Colors.grey[400],
+                        color: textColorDark,
                         fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'Phone: 01732222222',
                       style: TextStyle(
-                        color: Colors.grey[400],
+                        color: textColorRed,
                         fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -231,14 +306,15 @@ class _OrderCardState extends State<OrderCard> {
                         Icon(
                           Icons.calendar_month,
                           size: 14,
-                          color: Colors.grey[400],
+                          color: textColorDark,
                         ),
                         const SizedBox(width: 4),
                         Text(
                           '21-Sep-2024',
                           style: TextStyle(
-                            color: Colors.grey[400],
+                            color: textColorDark,
                             fontSize: 14,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -247,25 +323,27 @@ class _OrderCardState extends State<OrderCard> {
                     Text(
                       'Order No: 123456789',
                       style: TextStyle(
-                        color: Colors.grey[400],
+                        color: textColorDark,
                         fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'Created by: Mehedi Hasan',
                       style: TextStyle(
-                        color: Colors.grey[400],
+                        color: textColorDark,
                         fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 4),
-                    const Text(
+                    Text(
                       'Total Amount: BDT 13,200',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: buttonBlue,
                         fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -277,16 +355,16 @@ class _OrderCardState extends State<OrderCard> {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: boxColor,
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: RichText(
                         text: TextSpan(
                           children: [
-                            const TextSpan(
+                            TextSpan(
                               text: 'Status: ',
                               style: TextStyle(
-                                color: Colors.black,
+                                color: textColorDark,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,
                               ),
